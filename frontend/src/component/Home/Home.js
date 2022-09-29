@@ -21,12 +21,13 @@ const Home = () => {
     const { loading, error, products, productCount } = useSelector(
     (state) =>state.products
      )
-
+console.log(products)
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
   return (
    <Fragment>
+    {/* {loading ? "loadin" : <Fragment> */}
     <Metadata title="ECommerce_Store"></Metadata>
     <div className='banner'>
         <p>Welcome to Ecommerce</p>
@@ -37,19 +38,22 @@ const Home = () => {
             </button>
         </a>
     </div>
-    <h2 className='homeheading'>Product Feature</h2>
+    <h2 className='homeheading'> <span>Product </span>Feature</h2>
     <div className='container' id='continer'>
-    {/* {products && products.map((product=> <Product product= {product} />))} */}
-    {
-        products && products.map(product => {
-            <Product product = {product} />
-        })
-    }
+        {console.log(products)}
+   {products.map((product)=><Product  images = {product.images}  price = {product.price} ratings = {product.ratings} numofreviews ={product.numofreviews}/>
+   
+
+
+)
+
+   } 
 
 
     </div>
 
  
+   {/* </Fragment>} */}
    </Fragment>
   )
 }

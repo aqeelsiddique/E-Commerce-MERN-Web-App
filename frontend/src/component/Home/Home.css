@@ -53,24 +53,27 @@
   .homeheading {
     text-align: center;
     font-family: Roboto;
-    font-size: 1.4vmax;
+    font-size: 2vmax;
     border-bottom: 1px solid rgba(21, 21, 21, 0.5);
-    width: 20vmax;
+    width: 15vmax;
     padding: 1vmax;
-    margin: 5vmax auto;
+    margin: 1vmax auto;
     color: black;
+  }
+  .homeheading > span {
+    color: blueviolet;
   }
   
   .container {
     display: flex;
     margin: 2vmax auto;
-    width: 90%;
+    width: 85%;
      flex-wrap: wrap;
     justify-content: center;
     max-width: 100%; 
   }
   .productCard {
-    width: 14vmax;
+    width: 18vmax;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -80,7 +83,9 @@
     padding-bottom: 0.5vmax;
   }
   .productCard > img {
-    width: 14vmax;
+    width: 18vmax;
+    height: 22vmax;
+   
   }
   .productCard > div {
     margin: 0.5vmax;
