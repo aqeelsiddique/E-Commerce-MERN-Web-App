@@ -23,8 +23,11 @@ const Home = () => {
      )
 console.log(products)
     useEffect(() => {
+        if(error) {
+            return alert.error(error)
+        }
         dispatch(getProduct());
-    }, [dispatch]);
+    }, [dispatch, error, alert]);
   return (
    <Fragment>
     {/* {loading ? "loadin" : <Fragment> */}
@@ -42,17 +45,10 @@ console.log(products)
     <div className='container' id='continer'>
         {console.log(products)}
    {products.map((product)=><Product  images = {product.images}  price = {product.price} ratings = {product.ratings} numofreviews ={product.numofreviews}/>
-   
-
 
 )
-
    } 
-
-
     </div>
-
- 
    {/* </Fragment>} */}
    </Fragment>
   )

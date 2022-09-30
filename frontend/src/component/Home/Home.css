@@ -1,6 +1,6 @@
 .banner {
-    /* background-image: url("../../images/cover.jfif"); */
-    background-color: blueviolet;
+    background-image: url("https://images.pexels.com/photos/10155098/pexels-photo-10155098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    /* background-color: blueviolet; */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -10,17 +10,18 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    color: rgb(255, 255, 255);
+    color: rgb(204, 14, 14);
+
   }
   
   .banner > h1 {
-    margin: 5vmax;
+    margin: 2vmax;
   
-    font: 600 2.5vmax "Roboto";
+    font: 900 2.5vmax "Roboto";
   }
   
   .banner > p {
-    font: 300 1.4vmax "Lucida Sans";
+    font: 500 1.9vmax "Lucida Sans";
   }
 
   .banner > a > button {

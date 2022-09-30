@@ -1,12 +1,14 @@
 import React from 'react';
+import {useState} from "react";
 
 import Header from './component/layout/Header';
-import {BrowserRouter as Router, Route} from "react-router-dom"
+import {BrowserRouter as Router, Route , Link} from "react-router-dom"
 import { BrowserRouter  as Switch } from "react-router-dom";
 import Footer from './component/layout/Footer/Footer';
 import WebFont from 'webfontloader';
 
 import Home from './component/Home/Home.js';
+import About from './component/About/About';
 
 function App() {
   // React.useEffect(()=>{
@@ -18,7 +20,35 @@ function App() {
   //   });
   //   },[]);
   return (
+  
     <>
+
+    
+
+{/* <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          
+        </ul>
+
+        <hr />
+        <Switch>
+          <Route exact path="/">
+            <About />
+          </Route>
+         
+        </Switch>
+      </div>
+    </Router> */}
+    {/* <Router>
+      <Route path="/" exact component={About} />
+    </Router> */}
+      {/* <Router>
+    <Route path="/" exact component={Home} />
+  </Router> */}
     {/* let routes = (
   <div>
     <Route path="/">
@@ -34,24 +64,32 @@ function App() {
       <Footer />
     </Route>
   </div> */}
-
+{/* ///////////////////////////////////////// */}
     
     <Router>
     < Header />
     <Home />
-
-    {/* <Switch>
-    <Route exact path="/sad">
-      <loader />
-    </Route>
-      </Switch> */}
     < Footer />
     </Router>
+    {/* ///////////////// */}
+     {/* <Router>
+        <Header />
+
+       
+          <Switch>
+          <Route exact path="/" component={Home} />
+          
+          </Switch>
+      
+        <Footer />
+      </Router> */}
 
     
     </>
     
   );
 }
+
+
 
 export default App;
