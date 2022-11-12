@@ -7,9 +7,10 @@ process.on("uncaughtExpection" , (err) => {
    console.log(`Shutting down the server due to uncaught expection`);
    process.exit(1)
 })
-//configg
-dotenv.config({path:"backend/config/confi.env"});
+//config
+dotenv.config({path:"Backend/config/confi.env"});
 // Connecting to database
+// port=6780
 connectDatabase()
  app.listen(process.env.PORT,()=>{
     console.log(`Server is working on http://localhost:${process.env.PORT}`)
