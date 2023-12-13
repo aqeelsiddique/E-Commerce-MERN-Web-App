@@ -24,6 +24,7 @@ exports.getAllproducts = catchayncerror(async (req, res, next) => {
         products,
         pagecount
     })
+    console.log(products)
 });
 ////////////////get all product , pagination, sorting
 

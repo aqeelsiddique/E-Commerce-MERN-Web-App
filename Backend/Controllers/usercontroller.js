@@ -7,13 +7,7 @@ const sendEmail = require('../utils/senEmail')
 const nodemailer = require ('nodemailer');
 const { merge } = require('../app');
 // const randomString = require ('random-string');
-
-
 /////////////send email
-
-
-
-
 /// Register A User
 exports.registerUser = catchayncerror(async (req, res, next) =>{
     //this code line means agr humy specfie data chaiyae tu yeh estmal kr sgthy
@@ -26,7 +20,14 @@ exports.registerUser = catchayncerror(async (req, res, next) =>{
 
     }
   });
-  sendToken(user, 201, res)
+  const token = user.generateAuthToken();
+
+
+  res.status(200).json({
+    success:true,
+    user, token
+  })
+  // sendToken(user, 201, res)
 
 })
 
@@ -59,12 +60,12 @@ exports.loginUser = catchayncerror(async (req, res, next) =>{
         } 
 
         else {
-          sendToken(userlogin, 200, res)
+          // sendToken(userlogin, 200, res)
                     // res.cookie('jwttoken', token, {
           //     expires: new Date(Date.now() + 25892000000),
           //     httpOnly: true
           // })       
-            // res.send({meassage:" wellcome user login sucessfully"})            
+            res.send({meassage:" wellcome user login sucessfully"})            
         }
     }
      else {
