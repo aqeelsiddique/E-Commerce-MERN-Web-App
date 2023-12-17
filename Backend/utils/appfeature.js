@@ -4,9 +4,6 @@ class ApiFeatures  {
         this.query= query;
         this.querystr = querystr
 
-
-
-
     }
     search() {
         const keyword = this.querystr.keyword? {
@@ -47,6 +44,7 @@ class ApiFeatures  {
 
         return this;
     }
+    
 
 }
 

@@ -48,23 +48,23 @@ exports.loginUser = catchayncerror(async (req, res, next) =>{
     if (userlogin){
         const isMatch = await userlogin.comparePassword(password);
 
-        // token = await userlogin.generateAuthToken();
-        // console.log(token);
-        // res.cookie("jwttoken", token , {
-        //   expires:new Date(Date.now() + 25892000000),
-        //   httpOnly:true
-        // })
+        token = await userlogin.generateAuthToken();
+        console.log(token);
+        res.cookie("jwttoken", token , {
+          expires:new Date(Date.now() + 25892000000),
+          httpOnly:true
+        })
         ///create a cokki4res.cokkie
         if(!isMatch) {
             return next(new ErrorHandler("User Error", 400));          
         } 
 
         else {
-          // sendToken(userlogin, 200, res)
-                    // res.cookie('jwttoken', token, {
-          //     expires: new Date(Date.now() + 25892000000),
-          //     httpOnly: true
-          // })       
+          sendToken(userlogin, 200, res)
+                    res.cookie('jwttoken', token, {
+              expires: new Date(Date.now() + 25892000000),
+              httpOnly: true
+          })       
             res.send({meassage:" wellcome user login sucessfully"})            
         }
     }
