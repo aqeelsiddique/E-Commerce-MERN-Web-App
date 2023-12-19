@@ -17,11 +17,13 @@ import {
     try {
         dispatch({ type:ALL_PRODUCT_REQUEST})
 
-        const {data} = await axios.get("/api/v1/products")
+        const {data} = await axios.get("localhost:5009/api/v1/products")
         dispatch({ type:ALL_PRODUCT_SUCCESS,
             payload: data
 
         })
+        console.log("data",data)
+
         
     } catch (error) {
         dispatch({ type:ALL_PRODUCT_FAIL,
@@ -35,12 +37,12 @@ import {
   export const clearserrors  = () => async (dispatch) =>{
     dispatch({type:CLEAR_ERRORS})
   }
-  export const getProductDetails = (id) => async (dispatch) => {
+  export const getProductDetails = (_id) => async (dispatch) => {
     
     try {
       dispatch({ type: PRODUCT_DETAILS_REQUEST });
  
-      const { data } = await axios.get(`/api/v1/product/${id}`);
+      const { data } = await axios.get(`/api/v1/product/${_id}`);
       dispatch({
         type: PRODUCT_DETAILS_SUCCESS,
         payload: data.product,

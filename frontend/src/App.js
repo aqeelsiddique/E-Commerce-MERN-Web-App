@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from "react";
 
-import Header from './component/layout/Header';
+import Header from './component/layout/Header/Header.js';
 import {BrowserRouter as Router, Route , Link} from "react-router-dom"
 import { BrowserRouter  as Switch } from "react-router-dom";
 import Footer from './component/layout/Footer/Footer';

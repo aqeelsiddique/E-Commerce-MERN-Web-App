@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReactStars from "react-rating-stars-component";
 
-const Product = ({name,price,ratings,numofreviews,images}) => {
+const Product = ({name,price,ratings,numofreviews,images, _id}) => {
   console.log(name)
 
   console.log(numofreviews)
@@ -16,7 +16,7 @@ const Product = ({name,price,ratings,numofreviews,images}) => {
      
 }
   return (
-    <Link className='productCard' to="/product._id">
+    <Link className='productCard' to={_id}>
         <p>{name}</p>
         
         <img  src={images[0].url} alt='images' />

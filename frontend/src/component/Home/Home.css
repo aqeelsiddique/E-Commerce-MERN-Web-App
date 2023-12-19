@@ -1,6 +1,16 @@
-.banner {
-    background-image: url("https://images.pexels.com/photos/10155098/pexels-photo-10155098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+
+  /* styles/globals.css or your global stylesheet */
+  @import "~slick-carousel/slick/slick.css";
+  @import "~slick-carousel/slick/slick-theme.css";
+  
+
+
+
+      /* background-image: url("https://images.pexels.com/photos/10155098/pexels-photo-10155098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
     /* background-color: blueviolet; */
+
+/* .banner {
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,7 +60,32 @@
     left: 0;
     clip-path: polygon(100% 68%, 0 100%, 100% 100%);
     max-width: 100%;
+  } */
+
+
+
+
+
+/* styles/globals.css or your component stylesheet */
+.slider-container {
+    /* max-width: 100%; Adjust the max-width as needed */
+    /* margin: 0 auto;
+    max-width: 1420px ;
+       margin-left: 50px; */
+
+       width: 100%;
+       padding-right: 15px;
+       padding-left: 15px;
+       margin-right: auto;
+       margin-left: auto;
+
   }
+  
+  .slide-item img {
+    width: 85%;
+    height: auto;
+  }
+/*   
   .homeheading {
     text-align: center;
     font-family: Roboto;
@@ -72,7 +107,7 @@
      flex-wrap: wrap;
     justify-content: center;
     max-width: 100%; 
-  }
+  } */
   .productCard {
     width: 18vmax;
     display: flex;

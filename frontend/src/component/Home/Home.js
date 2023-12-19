@@ -5,6 +5,7 @@ import {CgScrollV} from 'react-icons/cg'
 import Metadata from '../layout/Metadata';
 import { getProduct } from '../../actions/actionProduct.js';
 import { useSelector, useDispatch } from 'react-redux';
+import SliderComponent from '../HomeSlider/HomeSlider.js';
 
 // import {CgMouse} from "react-icons/all"
 // import CgMouse from 'react-icons/all'
@@ -32,15 +33,20 @@ console.log(products)
    <Fragment>
     {/* {loading ? "loadin" : <Fragment> */}
     <Metadata title="ECommerce_Store"></Metadata>
-    <div className='banner'>
-        <p>Welcome to Ecommerce</p>
-        <h1>Find Amazing Product Below</h1>
-        <a href='#continer'>
-            <button>
+
+
+    <>
+
+        <SliderComponent />
+
+        
+            {/* <button>
                <CgScrollV /> Scroll 
-            </button>
-        </a>
-    </div>
+            </button> */}
+     
+    </>
+
+
     <h2 className='homeheading'> <span>Product </span>Feature</h2>
     <div className='container' id='continer'>
         {console.log(products)}
