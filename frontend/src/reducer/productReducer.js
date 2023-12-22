@@ -1,43 +1,34 @@
 import {
-    ALL_PRODUCT_FAIL,
-    ALL_PRODUCT_REQUEST,
-    ALL_PRODUCT_SUCCESS,
-
-   PRODUCT_DETAILS_REQUEST,
+  ALL_PRODUCT_FAIL,
+  ALL_PRODUCT_REQUEST,
+  ALL_PRODUCT_SUCCESS,
+  PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_SUCCESS,
-    NEW_PRODUCT_REQUEST,
-    NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_FAIL,
-    NEW_PRODUCT_RESET,
-   
-    
-    CLEAR_ERRORS,
-  } from "../constant/productConstants";
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
+  NEW_PRODUCT_RESET,
+  CLEAR_ERRORS,
+} from "../constant/productConstants";
 
-  
-
-
-  
 export const productsReducer = (state = { products: [] }, action) => {
-    switch (action.type) {
-      case ALL_PRODUCT_REQUEST:
-    
-        return {
-          loading: true,
-          products: [],
-        };
-      case ALL_PRODUCT_SUCCESS:
-        return {
-          loading: false,
-          products: action.payload.products,
-          productsCount: action.payload.productsCount,
-          // resultPerPage: action.payload.resultPerPage,
-          // filteredProductsCount: action.payload.filteredProductsCount,
-        };
+  switch (action.type) {
+    case ALL_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        products: [],
+      };
+    case ALL_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+        productsCount: action.payload.productsCount,
+        resultPerPage: action.payload.resultPerPage,
+        filteredProductsCount: action.payload.filteredProductsCount,
+      };
 
-        case ALL_PRODUCT_FAIL:
-    
+    case ALL_PRODUCT_FAIL:
       return {
         loading: true,
         error: action.payload,
@@ -57,7 +48,7 @@ export const productsReducer = (state = { products: [] }, action) => {
 
 export const productDetailsReducer = (state = { product: {} }, action) => {
   switch (action.type) {
-    case  PRODUCT_DETAILS_REQUEST:
+    case PRODUCT_DETAILS_REQUEST:
       return {
         loading: true,
         ...state,
@@ -82,8 +73,6 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
-
-
 
 export const newProductReducer = (state = { product: {} }, action) => {
   switch (action.type) {
@@ -118,5 +107,3 @@ export const newProductReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
-
-

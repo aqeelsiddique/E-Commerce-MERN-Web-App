@@ -1,110 +1,166 @@
-// import React from 'react'
-// import {ReactNavbar} from "overlay-navbar"
-// import  logo from "../images/logo.png"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 
-// const Header = () => {
-//   return (
-//     <div>
-    
-//         <ReactNavbar
-//           burgerColorHover= "#eb4034"
+library.add(fas);
 
-//         logo={logo}
-//         logoWidth= "20vmax"
-//         navColor1= "white"
-//         logoHoverSize= "10px"
-//         logoHoverColor ="#eb40341"
-//         link1Text = "Home"
-//         link2Text= "Products"
-//         link3Text= "Contact"
-//         link4Text= "Main"
-//         link5Text="About Us"
-//         link1Url = "/"
-//         link2Url= "/products"
-//         link3Url= "/contact"
-//         link4Url ="/about"
-//         link1Size = "1.3vmax"
-//         link1Color = "rgba(35, 35, 35,0.8)"
-//         nav1justifyContent = "flex-end"
-//         nav2justifyContent = "flex-end"
-//         nav3justifyContent = "flex-start"
-//         nav4justifyContent= "flex-start"
-//         link1ColorHover= "#eb4034"
-//         link1Margin= "1vmax"
-//         profileIconUrl= "/login"
-//         profileIconColor= "rgba(35, 35, 35,0.8)"
-//         searchIconColor= "rgba(35, 35, 35,0.8)"
-//         cartIconColor= "rgba(35, 35, 35,0.8)"
-//         profileIconColorHover= "#eb4034"
-//         searchIconColorHover = "#eb4034"
-//         cartIconColorHover = "#eb4034"
-//         cartIconMargin = "1vmax"
-//          />
+const Navbar = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
 
-       
-   
-//     </div>
-//   )
-// }
-
-// export default Header
-
-
-
-// Navbar.jsx
-import React from "react";
-import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
-
-import "../Header/Header.css"
-const Header = () => {
   return (
-    <div className="bg-gray-800 text-white p-4 flex justify-between items-center">
-      {/* Left Side: Search Input */}
-      <div className="flex items-center">
-        <div className="mr-4">
-          <FaSearch />
-        </div>
-        <input
-          type="text"
-          placeholder="Search..."
-          className="bg-gray-700 px-2 py-1 rounded"
-        />
-      </div>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container py-2">
+          {isSearchOpen ? (
+            // Show search box when isSearchOpen is true
+            <div className="search-box">
+              <input type="text" placeholder="Search" />
+              <button onClick={toggleSearch}>
+                <FaTimes />
+              </button>
+            </div>
+          ) : (
+            // Show search icon when isSearchOpen is false
+            <Link className="navbar-brand" to="/">
+              <FaSearch onClick={toggleSearch} />
+            </Link>
+          )}
 
-      {/* Center: Menu Items */}
-      <div className="flex items-center">
-        <a href="#" className="mx-2 hover:text-gray-300">
-          Main
-        </a>
-        <a href="#" className="mx-2 hover:text-gray-300">
-          Shop
-        </a>
-        <a href="#" className="mx-2 hover:text-gray-300">
-          Product
-        </a>
-        <a href="#" className="mx-2 hover:text-gray-300">
-          Logo
-        </a>
-        <a href="/portfolio" className="mx-2 hover:text-gray-300">
-          Portfolio
-        </a>
-        <a href="/blog" className="mx-2 hover:text-gray-300">
-          Blog
-        </a>
-      </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          {/* means */}
 
-      {/* Right Side: Login and Cart Icons */}
-      <div className="flex items-center">
-        <div className="mr-4">
-          <FaUser />
+          {/* Centered menu */}
+          <div className="collapse navbar-collapse align-middle" id="navbarNav">
+            <ul className="navbar-nav mx-auto nav_ul align-items-center">
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to="/about"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Main
+                </Link>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  Shop
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/services">
+                  Product
+                </Link>
+              </li>
+              <Link className="navbar-brand" to="/">
+                Logo
+              </Link>
+              <li className="nav-item">
+                <Link className="nav-link" to="/portfolio">
+                  Page/Fortfolio
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact">
+                  Contact Us
+                </Link>
+              </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="/"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  More
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          {/* end */}
+
+          {/* Left-aligned login and shopping cart icons */}
+          <div className="d-flex align-items-center">
+            <div className="mx-2">
+              <button
+                type="button"
+                className="btn1 mx-2"
+                style={{ border: "none", background: "none" }}
+              >
+                Login
+              </button>
+            </div>
+
+            <div className="mx-2">
+              <button
+                type="button"
+                className="btn1 mx-2"
+                style={{ border: "none", background: "none" }}
+              >
+                <FaShoppingCart />
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <FaShoppingCart />
-        </div>
-      </div>
-    </div>
+      </nav>
+    </>
   );
 };
 
-export default Header;
+export default Navbar;

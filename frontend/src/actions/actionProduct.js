@@ -13,24 +13,58 @@ import {
 
   } from "../constant/productConstants";
   //get all products
-  export const getProduct  = () => async (dispatch) => {
-    try {
-        dispatch({ type:ALL_PRODUCT_REQUEST})
+  // export const getProduct  = () => async (dispatch) => {
+  //   try {
+  //       dispatch({ type:ALL_PRODUCT_REQUEST})
 
-        const {data} = await axios.get("localhost:5009/api/v1/products")
-        dispatch({ type:ALL_PRODUCT_SUCCESS,
-            payload: data
+  //       const {data} = await axios.get("http://localhost:5000/api/v1/products")
+  //       dispatch({ type:ALL_PRODUCT_SUCCESS,
+  //           payload: data
 
-        })
-        console.log("data",data)
+  //       })
+  //       console.log("data",data)
 
         
+  //   } catch (error) {
+  //       dispatch({ type:ALL_PRODUCT_FAIL,
+  //           payload: error.response.data.message,
+  //       })    
+  //   }
+  // }
+  export const getProduct =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ALL_PRODUCT_REQUEST });
+
+      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+
+      if (category) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
+
+      const { data } = await axios.get(link);
+
+
+
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+
+      // In the Redux action
+console.log("Data from API:", data);
+
+// In the Product component
+console.log("Props:", {price, ratings});
+
     } catch (error) {
-        dispatch({ type:ALL_PRODUCT_FAIL,
-            payload: error.response.data.message,
-        })    
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
     }
-  }
+  };
 
   //clearing a errr
 

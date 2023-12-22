@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@react-icons/all-files": "^4.1.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -10,14 +11,20 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
     "axios": "^0.27.2",
+    "bootstrap": "5.3.0",
+    "clsx": "^2.0.0",
     "http-proxy-middleware": "^2.0.6",
     "i": "^0.3.7",
+    "install": "^0.13.0",
+    "next": "^14.0.4",
     "npm": "^10.2.5",
     "overlay-navbar": "^1.2.3",
+    "path-browserify": "^1.0.1",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
     "react-alert": "^7.0.3",
     "react-alert-template-basic-with-icons": "^1.2.4",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",
@@ -31,7 +38,9 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
-    "tailwindcss": "^3.3.7",
+    "tailwindcss": "^3.4.0",
+    "update": "^0.7.4",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4",
     "webfontloader": "^1.6.28"
   },
@@ -41,7 +50,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5009/",
+  "proxy": "http://localhost:5000/",
   "eslintConfig": {
     "extends": [
       "react-app",
