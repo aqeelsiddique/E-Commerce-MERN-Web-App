@@ -45,7 +45,7 @@ const Home = () => {
             </button> */}
       </>
 
-      <h2 className="homeheading">
+      {/* <h2 className="homeheading">
         {" "}
         <span>Product </span>Feature
       </h2>
@@ -59,7 +59,8 @@ const Home = () => {
             numofreviews={product.numofreviews}
           />
         ))}
-      </div>
+      </div> */}
+      <Product />
       {/* </Fragment>} */}
     </Fragment>
   );

@@ -70,7 +70,7 @@ function App() {
     <Router>
     < Header />
     <Home />
-    <Product />
+    {/* <Product /> */}
     < Footer />
     </Router>
     {/* ///////////////// */}
