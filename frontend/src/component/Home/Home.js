@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import "../Home/Home.css";
-import Product from "./Product.js";
+import Product from "../Product/Product.js";
 import { CgScrollV } from "react-icons/cg";
 import Metadata from "../layout/Metadata";
 import { getProduct } from "../../actions/actionProduct.js";

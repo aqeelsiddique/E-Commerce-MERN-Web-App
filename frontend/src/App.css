@@ -13,7 +13,7 @@ input[type="text"] {
   
   a {
     text-decoration: none;
-    color: inherit;
+    color: #000000;
   }
   
   a:hover {

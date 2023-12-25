@@ -31,7 +31,6 @@
 
 // export default Product;
 
-
 // import React, { useState, useEffect } from 'react';
 
 // const Product = () => {
@@ -87,18 +86,40 @@
 // };
 
 // export default Product;
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../actions/actionProduct';
-import { Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../../actions/actionProduct";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import ReactStars from "react-rating-stars-component";
+// import "./Product.css"; // Import a CSS file for styling
 
 const Product = () => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
+  const [hoveredProductId, setHoveredProductId] = useState(null);
+  const [displayedImage, setDisplayedImage] = useState({});
 
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (hoveredProductId !== null) {
+      // Find the product by ID
+      const hoveredProduct = products.find(
+        (product) => product._id === hoveredProductId
+      );
+
+      // Set the displayed image to the second image of the hovered product
+      setDisplayedImage(
+        hoveredProduct.images && hoveredProduct.images.length > 1
+          ? hoveredProduct.images[1]
+          : {}
+      );
+    } else {
+      setDisplayedImage({});
+    }
+  }, [hoveredProductId, products]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -112,22 +133,55 @@ const Product = () => {
     <div className="container" id="container">
       <h2 className="homeheading">
         {" "}
-        <span>Product </span>Feature
+        <span>Top </span>Collections
       </h2>
 
       <Grid container spacing={3}>
         {products.map((product) => (
-          <Grid item key={product._id} xs={12} sm={6} md={4}>
+          <Grid
+            item
+            key={product._id}
+            xs={12}
+            sm={6}
+            md={4}
+            onMouseEnter={() => setHoveredProductId(product._id)}
+            onMouseLeave={() => setHoveredProductId(null)}
+          >
             <Card>
               <CardMedia
                 component="img"
-                height="140"
+                height="200"
                 alt={product.name}
-                src={product.images && product.images.length > 0 ? product.images[0].url : 'placeholder-image-url'}
+                className={`product-image ${
+                  hoveredProductId === product._id ? "hovered" : ""
+                }`}
+                src={
+                  hoveredProductId === product._id && displayedImage.url
+                    ? displayedImage.url
+                    : product.images && product.images.length > 0
+                    ? product.images[0].url
+                    : "https://st2.depositphotos.com/2251265/10185/i/450/depositphotos_101857036-stock-photo-white-t-shirt-hanging.jpg"
+                }
               />
               <CardContent>
                 <Typography variant="h6">{product.name}</Typography>
-                {/* Add other product details here */}
+
+                <p>{product.description}</p>
+                <p style={{ color: "red" }}>${product.price}</p>
+
+                <p style={{ display: "flex", alignItems: "center" }}>
+                  <ReactStars
+                    edit={false}
+                    color="rgba(20,20,20,0.1)"
+                    activeColor="tomato"
+                    size={window.innerWidth < 600 ? 20 : 25}
+                    value={product.ratings}
+                    isHalf={true}
+                  />
+                  <span style={{ marginLeft: "5px" }}>
+                    ({product.numofreviews} Reviews)
+                  </span>
+                </p>
               </CardContent>
             </Card>
           </Grid>
@@ -138,10 +192,3 @@ const Product = () => {
 };
 
 export default Product;
-
-
-
-
-
-
-

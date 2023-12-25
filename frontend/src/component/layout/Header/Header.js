@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top"> {/* Added 'fixed-top' class */}
         <div className="container py-2">
           {isSearchOpen ? (
             // Show search box when isSearchOpen is true
@@ -89,7 +89,12 @@ const Navbar = () => {
                 </Link>
               </li>
               <Link className="navbar-brand" to="/">
-                Logo
+                <img
+                  src="/logo.png" // Adjust the path accordingly
+                  alt="logo"
+                  className="btn1 mx-2"
+                  style={{ width: "50px", height: "50px" }} // Adjust the size as needed
+                />
               </Link>
               <li className="nav-item">
                 <Link className="nav-link" to="/portfolio">
@@ -101,36 +106,16 @@ const Navbar = () => {
                   Contact Us
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="/"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  More
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="/">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  About{" "}
+                </Link>
+              </li>           
+              
+              
+              
+               </ul>
           </div>
 
           {/* end */}
@@ -140,7 +125,7 @@ const Navbar = () => {
             <div className="mx-2">
               <button
                 type="button"
-                className="btn1 mx-2"
+                className="btn1 mx-1"
                 style={{ border: "none", background: "none" }}
               >
                 Login
@@ -148,13 +133,11 @@ const Navbar = () => {
             </div>
 
             <div className="mx-2">
-              <button
-                type="button"
-                className="btn1 mx-2"
-                style={{ border: "none", background: "none" }}
-              >
-                <FaShoppingCart />
-              </button>
+              <img
+                src="/shopping-cart.svg" // Adjust the path accordingly
+                alt="Shopping Cart"
+                className="btn1 mx-2" // Adjust margin as needed
+              />
             </div>
           </div>
         </div>

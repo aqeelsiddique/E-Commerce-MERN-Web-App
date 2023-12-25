@@ -12,18 +12,20 @@ const SliderComponent = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    // nextArrow: <NextArrow />,
+    // prevArrow: <PrevArrow />
   };
 
   const slides = [
     {
-      image: "/sliderimg3.png",
+      image: "/slider02.jpeg",
       alt: "Slide 2",
       buttonText: "Shop Now",
       buttonLink: "https://goya.everthemes.com/demo-decor/product/norm-wall-clock/",
       text: "Discover our latest collection",
     },
     {
-      image: "/slideimg2.jpg",
+      image: "/slide03.jpeg",
       alt: "Slide 3",
       buttonText: "Shop Now",
       buttonLink: "https://goya.everthemes.com/demo-decor/product/norm-wall-clock/",
@@ -38,6 +40,18 @@ const SliderComponent = () => {
     },
   ];
 
+  const NextArrow = ({ onClick }) => (
+    <div className="arrow next" onClick={onClick}>
+      Next
+    </div>
+  );
+
+  const PrevArrow = ({ onClick }) => (
+    <div className="arrow prev" onClick={onClick}>
+      Prev
+    </div>
+  );
+
   return (
     <div className="flex">
       <div className="slider-container">
@@ -47,7 +61,7 @@ const SliderComponent = () => {
               <img src={slide.image} alt={slide.alt} />
               <div className="slide-content">
                 {/* <p className="slide-text">{slide.text}</p> */}
-                <a href={slide.buttonLink} className="shop-now-button" Index="-71">
+                <a href={slide.buttonLink} className="shop-now-button">
                   {slide.buttonText}
                 </a>
               </div>

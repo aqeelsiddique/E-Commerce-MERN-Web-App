@@ -9,7 +9,7 @@ import WebFont from 'webfontloader';
 
 import Home from './component/Home/Home.js';
 import About from './component/About/About';
-import Product from './component/Home/Product.js';
+// import Product from './component/Home/Product.js';
 
 function App() {
   // React.useEffect(()=>{
