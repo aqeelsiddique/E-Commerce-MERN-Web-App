@@ -112,6 +112,9 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAIL,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
 } from '../actions/actionProduct';
 
 const initialState = {
@@ -119,7 +122,6 @@ const initialState = {
   loading: false,
   error: null,
 };
-
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
@@ -147,5 +149,54 @@ const productsReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default productsReducer;
+
+
+// Reducer for product details
+// export const  productDetailsReducer = (state = { product: {} }, action) => {
+//   switch (action.type) {
+//     case PRODUCT_DETAILS_REQUEST:
+//       return { loading: true, ...state };
+//     case PRODUCT_DETAILS_SUCCESS:
+//       return { loading: false, product: action.payload, success: true };
+//     case PRODUCT_DETAILS_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// };
+
+// reducers/productReducer.js
+
+
+const initialState1 = {
+  product: null,
+  loading: false,
+  error: null,
+};
+
+export const productDetailsReducer = (state = initialState1, action) => {
+  switch (action.type) {
+    case PRODUCT_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PRODUCT_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        product: action.payload,
+        error: null,
+      };
+    case PRODUCT_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        product: null,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};

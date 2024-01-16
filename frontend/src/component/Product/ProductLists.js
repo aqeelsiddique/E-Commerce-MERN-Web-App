@@ -1,21 +1,18 @@
+
+
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../actions/actionProduct";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import ReactStars from "react-rating-stars-component";
-import { useNavigate, Link } from "react-router-dom";
+// import "./Product.css"; // Import your CSS file for styling
 
-const Product = ({ product }) => {
-  const navigate = useNavigate();
-
-  const handleImageClick = () => {
-    // Navigate to the product details page when the image is clicked
-    navigate(`/product/${product._id}`);
-  };
-
+const ProductLists = () => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
   const [hoveredProductId, setHoveredProductId] = useState(null);
+
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
@@ -40,9 +37,9 @@ const Product = ({ product }) => {
             <Grid
               item
               key={product._id}
-              xs={12}
+              xs={12} // Set xs={12} to make each product take up the full width on extra-small screens
               sm={6}
-              md={3}
+              md={3} // Set md={3} to make each product take up one-third of the width on medium-sized screens
               onMouseEnter={() => setHoveredProductId(product._id)}
               onMouseLeave={() => setHoveredProductId(null)}
             >
@@ -52,25 +49,14 @@ const Product = ({ product }) => {
                     component="div"
                     className="product-image-container"
                   >
-                    {/* Use Link for navigation */}
-                    <Link
-                      to={`/product/${product._id}`}
-                      // onClick={(e) => e.stopPropagation()}
-                      onClick={handleImageClick}
-                    >
-                      <img
-                        className={`product-image ${
-                          hoveredProductId === product._id ? "hidden" : ""
-                        }`}
-                        src={
-                          product.images && product.images.length > 0
-                            ? product.images[0].url
-                            : ""
-                        }
-                        alt={product.name}
-                        style={{ width: "100%", height: "auto" }}
-                      />
-                    </Link>
+                    <img
+                      className={`product-image ${
+                        hoveredProductId === product._id ? "hidden" : ""
+                      }`}
+                      src={product.images[0].url}
+                      alt={product.name}
+                      style={{ width: "100%", height: "auto" }}
+                    />
                   </CardMedia>
                 </Card>
               )}
@@ -81,19 +67,14 @@ const Product = ({ product }) => {
                     component="div"
                     className="product-image-container"
                   >
-                    <Link
-                      to={`/product/${product._id}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <img
-                        className={`product-image ${
-                          hoveredProductId === product._id ? "" : "hidden"
-                        }`}
-                        src={product.second_images[0].url}
-                        alt={product.name}
-                        style={{ width: "100%", height: "auto" }}
-                      />
-                    </Link>
+                    <img
+                      className={`product-image ${
+                        hoveredProductId === product._id ? "" : "hidden"
+                      }`}
+                      src={product.second_images[0].url}
+                      alt={product.name}
+                      style={{ width: "100%", height: "auto" }}
+                    />
                   </CardMedia>
                 </Card>
               )}
@@ -124,4 +105,5 @@ const Product = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductLists;
+

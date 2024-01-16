@@ -129,6 +129,13 @@ export const FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_FAIL = 'FETCH_PRODUCTS_FAIL';
 
+
+// Action Types
+export const PRODUCT_DETAILS_REQUEST = 'PRODUCT_DETAILS_REQUEST';
+export const PRODUCT_DETAILS_SUCCESS = 'PRODUCT_DETAILS_SUCCESS';
+export const PRODUCT_DETAILS_FAIL = 'PRODUCT_DETAILS_FAIL';
+
+
 // Action creators
 export const getProduct = () => async (dispatch) => {
   try {
@@ -147,6 +154,51 @@ export const getProduct = () => async (dispatch) => {
     dispatch({
       type: FETCH_PRODUCTS_FAIL,
       payload: error.response.data.message,
+    });
+  }
+};
+// // Action creator to get product details
+// export const getProductDetails = (productId) => async (dispatch) => {
+//   try {
+//     dispatch({ type: PRODUCT_DETAILS_REQUEST });
+
+//     // Make API request to get product details
+//     const { data } = await axios.get(`http://localhost:5000/api/v1/product/${id}`); 
+//     console.log(data)   
+    
+//     dispatch({
+//       type: PRODUCT_DETAILS_SUCCESS,
+//       payload: data.message,
+//     });
+//     console.log("product deatil",data)
+//   } catch (error) {
+//     dispatch({
+//       type: PRODUCT_DETAILS_FAIL,
+//       payload: error.response && error.response.data.message? error.response.data.message: error.message,
+//     });
+//   }
+// };
+
+
+
+// Action Creator to get product details
+export const getProductDetails = (productId) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/product/${productId}`);
+    console.log("testing products deatils",data)
+
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };

@@ -6,6 +6,8 @@ import Metadata from "../layout/Metadata";
 import { getProduct } from "../../actions/actionProduct.js";
 import { useSelector, useDispatch } from "react-redux";
 import SliderComponent from "../HomeSlider/HomeSlider.js";
+import Banner from "../Banner/Banner.js";
+import Header from "../layout/Header/Header.js";
 
 // import {CgMouse} from "react-icons/all"
 // import CgMouse from 'react-icons/all'
@@ -36,30 +38,15 @@ const Home = () => {
     <Fragment>
       {/* {loading ? "loadin" : <Fragment> */}
       <Metadata title="ECommerce_Store"></Metadata>
+      <Header />
+
 
       <>
         <SliderComponent />
 
-        {/* <button>
-               <CgScrollV /> Scroll 
-            </button> */}
       </>
-
-      {/* <h2 className="homeheading">
-        {" "}
-        <span>Product </span>Feature
-      </h2>
-      <div className="container" id="continer">
-        {console.log(products)}
-        {products.map((product) => (
-          <Product
-            images={product.images}
-            price={product.price}
-            ratings={product.ratings}
-            numofreviews={product.numofreviews}
-          />
-        ))}
-      </div> */}
+      <Product />
+      <Banner />
       <Product />
       {/* </Fragment>} */}
     </Fragment>
