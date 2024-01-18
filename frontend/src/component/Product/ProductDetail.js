@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { getProductDetails } from "../../actions/actionProduct";
 import styled from "styled-components";
 import { Grid, Card, Typography, Rating, Button } from "@mui/material";
+import ReviewCard from "./ReviewCard";
 
 const Container = styled.div`
   max-width: 75%;
@@ -133,6 +134,8 @@ const AddButton = styled(Button)`
   border-radius: 30px;
 `;
 
+
+
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -140,11 +143,20 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
 
+  const [selectedImage, setSelectedImage] = useState("");
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
-  const [selectedImage, setSelectedImage] = useState("");
+ 
+
+  const submitReviewToggle = () => {
+    setOpen(!open);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -158,7 +170,6 @@ const ProductDetails = () => {
     return <p>Product not found</p>;
   }
 
-  // Concatenate all image arrays
   const allImages = [
     ...product.images,
     ...product.second_images,
@@ -166,51 +177,73 @@ const ProductDetails = () => {
     ...product.img4,
     ...product.img5,
   ];
+
   return (
+    <>
     <Container>
-      <LeftContainer>
-        <Card>
-          <MainImage src={selectedImage || allImages[0]?.url} />
-        </Card>
-        <OptionContainer>
-          {allImages.map((image, index) => (
-            <OptionImage
-              key={index}
-              src={image.url}
-              alt={`Product Image ${index + 1}`}
-              onClick={() => setSelectedImage(image.url)}
-            />
-          ))}
-        </OptionContainer>
-      </LeftContainer>
-      <RightContainer>
-        <Typography variant="h3">{product.name}</Typography>
-        <Typography variant="h4">
-          <small>$</small>
-          {product.price}
-        </Typography>
-        <Description>{product.description}</Description>
-        <Typography variant="h5">Color-Rose Gold</Typography>
-        <ColorContainer>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </ColorContainer>
-        <Typography variant="h5">Number</Typography>
-        <AddContainer>
-          <span>-</span>
-          <label>1</label>
-          <span>+</span>
-        </AddContainer>
-        <AddButton variant="contained" color="primary">
-          Add to Bag
-        </AddButton>
-      </RightContainer>
-    </Container>
+    <LeftContainer>
+      <Card>
+        <MainImage src={selectedImage || allImages[0]?.url} />
+      </Card>
+      <OptionContainer>
+        {allImages.map((image, index) => (
+          <OptionImage
+            key={index}
+            src={image.url}
+            alt={`Product Image ${index + 1}`}
+            onClick={() => setSelectedImage(image.url)}
+          />
+        ))}
+      </OptionContainer>
+    </LeftContainer>
+    <RightContainer>
+      <Typography variant="h3">{product.name}</Typography>
+      <Typography variant="h4">
+        <small>$</small>
+        {product.price}
+      </Typography>
+      <Description>{product.description}</Description>
+      <Typography variant="h5">Color-Rose Gold</Typography>
+      <ColorContainer>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </ColorContainer>
+      <Typography variant="h5">Number</Typography>
+      <AddContainer>
+        <span>-</span>
+        <label>1</label>
+        <span>+</span>
+      </AddContainer>
+      <AddButton variant="contained" color="primary" onClick={submitReviewToggle}>
+        Add to Bag
+      </AddButton>
+    </RightContainer>
+
+
+  
+  </Container>
+
+<h3 className="reviewsHeading">REVIEWS</h3>
+{product.reviews && product.reviews[0] ? (
+            <div className="reviews">
+              {product.reviews &&
+                product.reviews.map((review) => (
+                  <ReviewCard key={review._id} review={review} />
+                ))}
+            </div>
+          ) : (
+            <p className="noReviews">No Reviews Yet</p>
+          )}
+
+
+</>
+
+
   );
 };
 

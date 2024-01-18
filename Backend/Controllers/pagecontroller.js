@@ -16,24 +16,15 @@ const pagenant = async(req, res, next) => {
         const resultPerPage = 8;
         var product_data;
         var skip;
-
     if(page<=1){
         skip=0
-
     }
     else {
         skip = (page-1)*4
 
-
-
     }
-
-
      if(sort){
-
-
-
-        }
+       }
         else{
             product_data = await Product.find().skip(skip).limit(4)
            
@@ -44,13 +35,11 @@ const pagenant = async(req, res, next) => {
             data:product_data
         })
 
-
     }
     catch(error) {
         res.status(299).send({success:false, msg:error.message})
     }
 }
-
 const pagenant2 = async(req, res, next) => {
     try{
         var page = req.body.page;

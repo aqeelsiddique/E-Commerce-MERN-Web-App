@@ -1,6 +1,6 @@
 import React from 'react'
-import playstore from '../../images/downloadapp.png'
-import google from "../../images/googleplay.png"
+// import playstore from '../../images/downloadapp.png'
+// import google from "../../images/googleplay.png"
 import ReactDOM from 'react-dom'
 import { SocialIcon } from 'react-social-icons'
 import { FcApproval } from "react-icons/fc"
