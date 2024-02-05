@@ -1,11 +1,10 @@
-// ProductDetails.js
-// ProductDetails.js
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "../../actions/actionProduct";
 import styled from "styled-components";
-import { Grid, Card, Typography, Rating, Button } from "@mui/material";
+import { Card, Typography, Button } from "@mui/material";
+import { GlassMagnifier } from "react-image-magnifiers";
 import ReviewCard from "./ReviewCard";
 
 const Container = styled.div`
@@ -50,19 +49,16 @@ const RightContainer = styled.div`
   }
 `;
 
-const MainImage = styled.img`
-  width: auto;
-  height: auto;
-`;
-
 const OptionContainer = styled.div`
   display: flex;
+  margin-top: 10px;
 `;
 
 const OptionImage = styled.img`
   width: 75px;
   height: 75px;
   padding: 10px;
+  cursor: pointer;
 `;
 
 const Description = styled.p`
@@ -70,57 +66,8 @@ const Description = styled.p`
   line-height: 25px;
 `;
 
-const ColorContainer = styled.div`
-  display: flex;
-
-  span {
-    width: 25px;
-    height: 25px;
-    background: #000;
-    border-radius: 50%;
-    margin: 20px 10px 20px 0;
-  }
-
-  span:nth-child(2) {
-    background: #ededed;
-  }
-
-  span:nth-child(3) {
-    background: #d5d6d8;
-  }
-
-  span:nth-child(4) {
-    background: #efe0de;
-  }
-
-  span:nth-child(5) {
-    background: #ab8ed1;
-  }
-
-  span:nth-child(6) {
-    background: #f04d44;
-  }
-`;
-
 const AddContainer = styled.div`
   display: flex;
-
-  span,
-  label {
-    width: 25px;
-    height: 25px;
-    background: none;
-    border: 1px solid #c1908b;
-    color: #c1908b;
-    text-align: center;
-    line-height: 25px;
-  }
-
-  label {
-    padding: 10px 30px 0 20px;
-    border-radius: 50px;
-    line-height: 0;
-  }
 `;
 
 const AddButton = styled(Button)`
@@ -134,7 +81,13 @@ const AddButton = styled(Button)`
   border-radius: 30px;
 `;
 
+const ReviewsContainer = styled.div`
+  margin-top: 20px;
+`;
 
+const NoReviewsMessage = styled.p`
+  margin-top: 20px;
+`;
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -152,12 +105,6 @@ const ProductDetails = () => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
- 
-
-  const submitReviewToggle = () => {
-    setOpen(!open);
-  };
-
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -170,80 +117,73 @@ const ProductDetails = () => {
     return <p>Product not found</p>;
   }
 
+  // Check if 'images' property exists before accessing it
   const allImages = [
-    ...product.images,
-    ...product.second_images,
-    ...product.img3,
-    ...product.img4,
-    ...product.img5,
+    ...(product.images || []),
+    ...(product.second_images || []),
+    ...(product.img3 || []),
+    ...(product.img4 || []),
+    ...(product.img5 || []),
   ];
 
   return (
     <>
-    <Container>
-    <LeftContainer>
-      <Card>
-        <MainImage src={selectedImage || allImages[0]?.url} />
-      </Card>
-      <OptionContainer>
-        {allImages.map((image, index) => (
-          <OptionImage
-            key={index}
-            src={image.url}
-            alt={`Product Image ${index + 1}`}
-            onClick={() => setSelectedImage(image.url)}
-          />
-        ))}
-      </OptionContainer>
-    </LeftContainer>
-    <RightContainer>
-      <Typography variant="h3">{product.name}</Typography>
-      <Typography variant="h4">
-        <small>$</small>
-        {product.price}
-      </Typography>
-      <Description>{product.description}</Description>
-      <Typography variant="h5">Color-Rose Gold</Typography>
-      <ColorContainer>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </ColorContainer>
-      <Typography variant="h5">Number</Typography>
-      <AddContainer>
-        <span>-</span>
-        <label>1</label>
-        <span>+</span>
-      </AddContainer>
-      <AddButton variant="contained" color="primary" onClick={submitReviewToggle}>
-        Add to Bag
-      </AddButton>
-    </RightContainer>
+      <Container>
+        <LeftContainer>
+          <Card>
+            <GlassMagnifier
+              imageSrc={selectedImage || allImages[0]?.url}
+              imageAlt="Magnifier"
+              largeImageSrc={selectedImage || allImages[0]?.url}
+              allowOverflow={false}
+            />
+          </Card>
+          <OptionContainer>
+            {allImages.map((image, index) => (
+              <OptionImage
+                key={index}
+                src={image.url}
+                alt={`Product Image ${index + 1}`}
+                onClick={() => setSelectedImage(image.url)}
+              />
+            ))}
+          </OptionContainer>
+        </LeftContainer>
+        <RightContainer>
+          <Typography variant="h3">{product.name}</Typography>
+          <Typography variant="h4">
+            <small>$</small>
+            {product.price}
+          </Typography>
+          <Description>{product.description}</Description>
+          <Typography variant="h5">Color-Rose Gold</Typography>
+          <Typography variant="h5">Number</Typography>
+          <AddContainer>
+            <span>-</span>
+            <label>1</label>
+            <span>+</span>
+          </AddContainer>
+          <AddButton
+            variant="contained"
+            color="primary"
+            onClick={() => setOpen(true)}
+          >
+            Add to Bag
+          </AddButton>
+        </RightContainer>
+      </Container>
 
-
-  
-  </Container>
-
-<h3 className="reviewsHeading">REVIEWS</h3>
-{product.reviews && product.reviews[0] ? (
-            <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))}
-            </div>
-          ) : (
-            <p className="noReviews">No Reviews Yet</p>
-          )}
-
-
-</>
-
-
+      <h3 className="reviewsHeading">REVIEWS</h3>
+      {product.reviews && product.reviews[0] ? (
+        <ReviewsContainer>
+          {product.reviews.map((review) => (
+            <ReviewCard key={review._id} review={review} />
+          ))}
+        </ReviewsContainer>
+      ) : (
+        <NoReviewsMessage>No Reviews Yet</NoReviewsMessage>
+      )}
+    </>
   );
 };
 
